@@ -272,7 +272,9 @@ def hidden_states_contour(model, points, directions, cell=False, attr='hidden'):
                             model.classifier, 
                             device, 
                             getattr(model, attr).detach().cpu().squeeze(), 
-                            directions.astype(np.int), 
+        # NB `np.int` was a deprecated alias for the builtin `int`. To avoid this error in existing code, use `int` by itself. Doing this will not modify any behavior and is safe.
+        # When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision.
+                            directions.astype(int), 
                             0.5, 
                             cm=new_cmap, 
                             cm_bright=ListedColormap(['#FF3300', '#000099']), cbar=ci==1)

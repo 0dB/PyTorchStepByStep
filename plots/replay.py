@@ -397,8 +397,9 @@ def build_feature_space(model, states, X, y, layer_name=None, contour_points=100
             bent_contour_lines.append(contour_values[layer_name].reshape(output_shape))
             # Makes predictions for each point in the contour surface
             #bent_preds.append((get_predictions(inputs=inputs)[0].reshape(output_shape) > .5).astype(np.int))
-            bent_preds.append((func(contour_values[last_layer_name]).reshape(output_shape) > .5).astype(np.int))
-            
+            # NB `np.int` was a deprecated alias for the builtin `int`. To avoid this error in existing code, use `int` by itself. Doing this will not modify any behavior and is safe.
+            # When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision. 
+            bent_preds.append((func(contour_values[last_layer_name]).reshape(output_shape) > .5).astype(int))
 
     bent_inputs = np.array(bent_inputs)
 

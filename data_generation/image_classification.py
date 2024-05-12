@@ -3,7 +3,9 @@ import numpy as np
 
 def gen_img(start, target, fill=1, img_size=10):
     # Generates empty image
-    img = np.zeros((img_size, img_size), dtype=np.float)
+    # NB `np.float` was a deprecated alias for the builtin `float`. To avoid this error in existing code, use `float` by itself. Doing this will not modify any behavior and is safe.
+    # If you specifically wanted the numpy scalar type, use `np.float64` here.
+    img = np.zeros((img_size, img_size), dtype=float)
 
     start_row, start_col = None, None
 
@@ -51,6 +53,8 @@ def generate_dataset(img_size=10, n_images=100, binary=True, seed=17):
                        for s, t in zip(starts, targets)], dtype=np.uint8)
     
     if binary:
-        targets = (targets > 0).astype(np.int)
+        # NB `np.int` was a deprecated alias for the builtin `int`. To avoid this error in existing code, use `int` by itself. Doing this will not modify any behavior and is safe.
+        # When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision.
+        targets = (targets > 0).astype(int)
     
     return images, targets
