@@ -1,5 +1,8 @@
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+# NB
+device = 'mps' if torch.has_mps else device
+
 
 # Sets learning rate - this is "eta" ~ the "n" like Greek letter
 lr = 0.1
