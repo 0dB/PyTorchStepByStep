@@ -1,4 +1,3 @@
-
 # Sets learning rate - this is "eta" ~ the "n" like Greek letter
 lr = 0.1
 

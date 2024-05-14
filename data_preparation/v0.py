@@ -1,7 +1,5 @@
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-# NB
-device = 'mps' if torch.has_mps else device
+device = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Our data was in Numpy arrays, but we need to transform them
 # into PyTorch's Tensors and then we send them to the 

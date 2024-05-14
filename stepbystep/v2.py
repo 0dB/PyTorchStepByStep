@@ -17,7 +17,7 @@ class StepByStep(object):
         self.model = model
         self.loss_fn = loss_fn
         self.optimizer = optimizer
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.device = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
         # Let's send the model to the specified device right away
         self.model.to(self.device)
 
@@ -51,7 +51,7 @@ class StepByStep(object):
             self.device = device
             self.model.to(self.device)
         except RuntimeError:
-            self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+            self.device = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
             print(f"Couldn't send it to {device}, sending it to {self.device} instead.")
             self.model.to(self.device)
 
